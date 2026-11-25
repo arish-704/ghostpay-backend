@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: ghostpay-backend
+    runtime: java
+    plan: free
+    region: oregon
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -Dserver.port=$PORT -jar target/ghostpay-backend-0.0.1-SNAPSHOT.jar
+    healthCheckPath: /
+    envVars:
+      - key: JAVA_VERSION
+        value: 21
+      - key: PORT
+        value: 10000

@@ -1,16 +1,14 @@
 server:
   port: ${PORT:8080}
 
-
 spring:
   application:
     name: ghostpay-backend
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:h2:mem:ghostpay;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE}
-    driver-class-name: ${SPRING_DATASOURCE_DRIVER:org.h2.Driver}
-    username: ${SPRING_DATASOURCE_USERNAME:sa}
-    password: ${SPRING_DATASOURCE_PASSWORD:}
+    url: ${SPRING_DATASOURCE_URL:${DATABASE_URL:jdbc:h2:mem:ghostpay;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE}}
+    username: ${SPRING_DATASOURCE_USERNAME:${DB_USERNAME:sa}}
+    password: ${SPRING_DATASOURCE_PASSWORD:${DB_PASSWORD:}}
 
   h2:
     console:
@@ -18,7 +16,7 @@ spring:
       path: /h2-console
 
   jpa:
-    database-platform: ${SPRING_JPA_PLATFORM:org.hibernate.dialect.H2Dialect}
+    open-in-view: false
     hibernate:
       ddl-auto: update
     show-sql: false
@@ -32,4 +30,3 @@ ghostpay:
     packet-freshness-hours: 24
   crypto:
     key-size: 2048
-
